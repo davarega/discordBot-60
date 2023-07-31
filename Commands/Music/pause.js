@@ -35,6 +35,7 @@ module.exports = {
 		try {
 			if(queue.paused) {
 				queue.resume();
+				embed.setDescription("\`⏭\` | **Song has been:** `resumed`");
 
 				logHandler("distube", "7", user.tag, "", queue.songs[0].name);
 				return interaction.followUp({ embeds: [embed] });
@@ -44,7 +45,7 @@ module.exports = {
 	
 				logHandler("distube", "6", user.tag, "", queue.songs[0].name);
 				return interaction.followUp({ embeds: [embed] });
-			}
+			};
 
 		} catch (error) {
 			console.log(error);

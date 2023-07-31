@@ -33,11 +33,19 @@ module.exports = {
 		};
 
 		try {
-			queue.resume();
-			embed.setDescription("\`⏭\` | **Song has been:** `resumed`");
+			if(queue.paused) {
+				queue.resume();
+				embed.setDescription("\`⏭\` | **Song has been:** `resumed`");
 
-			logHandler("distube", "7", user.tag, "", queue.songs[0].name);
-			return interaction.followUp({ embeds: [embed] });
+				logHandler("distube", "7", user.tag, "", queue.songs[0].name);
+				return interaction.followUp({ embeds: [embed] });
+			} else {
+				queue.pause();
+				embed.setDescription("\`⏭\` | **Song has been:** `paused`");
+	
+				logHandler("distube", "6", user.tag, "", queue.songs[0].name);
+				return interaction.followUp({ embeds: [embed] });
+			};
 
 		} catch (error) {
 			console.log(error);
