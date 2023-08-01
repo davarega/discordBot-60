@@ -18,36 +18,56 @@ module.exports = {
 		const { member, user } = interaction;
 		const embed = new EmbedBuilder();
 
+		const queue = client.distube.getQueue(interaction);
+		if (!queue) {
+			logHandler("error", "0", user.tag, interaction.commandName, "", "no one is playing music at this moment");
+			return interaction.followUp(`no one is playing music at this moment!`);
+		};
+		
 		try {
-			const queue = client.distube.getQueue(interaction);
-			if (!queue) {
-				logHandler("error", "0", user.tag, interaction.commandName, "", "no one is playing music at this moment");
-				return interaction.followUp(`no one is playing music at this moment!`);
+			
+			if (queue.songs[0].formattedDuration === 'Live') {
+				
+				embed.setAuthor({ name: queue.songs[0].playing ? 'Song Pause...' : 'Now Playing...', iconURL: "https://cdn.discordapp.com/emojis/741605543046807626.gif" })
+					.setColor('#000001')
+					.setTitle(`${queue.songs[0].name || 'Unknown Title'}`)
+					.setURL(`${queue.songs[0].url}`)
+					// .setDescription(`**[${queue.songs[0].name}](${queue.songs[0].url})**`)
+					.setThumbnail(`${queue.songs[0].thumbnail}`)
+					.addFields(
+						// { name: `Duration:`, value: `${queue.songs[0].formattedDuration}`, inline: true },
+						{ name: 'Uploader:', value: `**[${queue.songs[0].uploader.name}](${queue.songs[0].uploader.url})**`, inline: true },
+						{ name: 'Requester:', value: `${queue.songs[0].user}`, inline: true },
+						{ name: 'Volume:', value: `${queue.volume}%`, inline: true },
+						{ name: 'Filters:', value: `${queue.filters.names.join(', ') || "Normal"}`, inline: true },
+						{ name: 'Views', value: `${queue.songs[0].views}`, inline: true },
+						{ name: 'Likes:', value: `${queue.songs[0].likes}`, inline: true },
+					)
+					.addFields({ name: `Current Duration: \`[${queue.formattedCurrentTime} / ${queue.songs[0].formattedDuration}]\``, value: `\`\`\`🔴 | 🧿▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\`\`\``, inline: false })
+					.setTimestamp()
+			} else {
+				const part = Math.floor((queue.currentTime / queue.songs[0]?.duration) * 30);
+
+				embed.setAuthor({ name: queue.songs[0].playing ? 'Song Pause...' : 'Now Playing...', iconURL: "https://cdn.discordapp.com/emojis/741605543046807626.gif" })
+					.setColor('#000001')
+					.setTitle(`${queue.songs[0].name || 'Unknown Title'}`)
+					.setURL(`${queue.songs[0].url}`)
+					// .setDescription(`**[${queue.songs[0].name}](${queue.songs[0].url})**`)
+					.setThumbnail(`${queue.songs[0].thumbnail}`)
+					.addFields(
+						// { name: `Duration:`, value: `${queue.songs[0].formattedDuration}`, inline: true },
+						{ name: 'Uploader:', value: `**[${queue.songs[0].uploader.name}](${queue.songs[0].uploader.url})**`, inline: true },
+						{ name: 'Requester:', value: `${queue.songs[0].user}`, inline: true },
+						{ name: 'Volume:', value: `${queue.volume}%`, inline: true },
+						{ name: 'Filters:', value: `${queue.filters.names.join(', ') || "Normal"}`, inline: true },
+						{ name: 'Views', value: `${queue.songs[0].views}`, inline: true },
+						{ name: 'Likes:', value: `${queue.songs[0].likes}`, inline: true },
+					)
+					.addFields({ name: `Current Duration: \`[${queue.formattedCurrentTime} / ${queue.songs[0].formattedDuration}]\``, value: `\`\`\`🔴 | ${'▬'.repeat(part) + '🧿' + '▬'.repeat(30 - part)}\`\`\``, inline: false })
+					.setTimestamp()
 			};
 
-			const uni = `${queue.songs[0].playing ? '⏸️ |' : '🔴 |'}`;
-			const part = Math.floor((queue.currentTime / queue.songs[0].duration) * 30);
-
-			const embed = new EmbedBuilder()
-				.setAuthor({ name: queue.songs[0].playing ? 'Song Pause...' : 'Now Playing...', iconURL: "https://cdn.discordapp.com/emojis/741605543046807626.gif" })
-				.setColor('#000001')
-				.setTitle(`${queue.songs[0].name || 'Unknown Title'}`)
-				.setURL(`${queue.songs[0].url}`)
-				// .setDescription(`**[${queue.songs[0].name}](${queue.songs[0].url})**`)
-				.setThumbnail(`${queue.songs[0].thumbnail}`)
-				.addFields(
-					// { name: `Duration:`, value: `${queue.songs[0].formattedDuration}`, inline: true },
-					{ name: 'Uploader:', value: `**[${queue.songs[0].uploader.name}](${queue.songs[0].uploader.url})**`, inline: true },
-					{ name: 'Requester:', value: `${queue.songs[0].user}`, inline: true },
-					{ name: 'Volume:', value: `${queue.volume}%`, inline: true },
-					{ name: 'Filters:', value: `${queue.filters.names.join(', ') || "Normal"}`, inline: true },
-					{ name: 'Views', value: `${queue.songs[0].views}`, inline: true },
-					{ name: 'Likes:', value: `${queue.songs[0].likes}`, inline: true },
-				)
-				.addFields({ name: `Current Duration: \`[${queue.formattedCurrentTime} / ${queue.songs[0].formattedDuration}]\``, value: `\`\`\`${uni} ${'▬'.repeat(part) + '🎶' + '▬'.repeat(30 - part)}\`\`\``, inline: false })
-				.setTimestamp()
-
-				logHandler("client", "3", user.tag, interaction.commandName);
+			logHandler("client", "3", user.tag, interaction.commandName);
 			return interaction.followUp({ embeds: [embed] });
 
 		} catch (error) {

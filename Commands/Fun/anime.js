@@ -30,7 +30,7 @@ module.exports = {
 		const embed = new EmbedBuilder();
 
 		try {
-			const response = await axios.get(`https://nekos.best/api/v2/waifu`);
+			const response = await axios.get(`https://nekos.best/api/v2/${value}`);
 			const data = await response.data.results[0];
 
 			embed.setTitle(`Random ${value.charAt(0).toUpperCase()}${value.slice(1)} Image`)

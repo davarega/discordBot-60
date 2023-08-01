@@ -8,7 +8,7 @@ module.exports = {
 		.setDescription("Play a song.")
 		.addStringOption((option) =>
 			option.setName("query")
-				.setDescription("Query a song.")
+				.setDescription("Query a song. (support youtube/spotify/soundcloud url)")
 				.setRequired(true)
 		),
 	/**

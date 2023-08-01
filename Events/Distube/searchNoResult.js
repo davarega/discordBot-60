@@ -2,7 +2,7 @@ const { EmbedBuilder } = require("discord.js");
 const { logHandler } = require("../../Handlers/logHandler");
 
 module.exports = {
-	name: "noResult",
+	name: "searchNoResult",
 
 	async execute(client, query, track) {
 		const embed = new EmbedBuilder()

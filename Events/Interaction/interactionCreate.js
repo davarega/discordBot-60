@@ -1,4 +1,6 @@
 const { ChatInputCommandInteraction } = require('discord.js');
+const { logHandler } = require('../../Handlers/logHandler');
+const accountSchema = require('../../Mode../../Models/accountSchema');
 
 module.exports = {
 	name: "interactionCreate",
@@ -7,13 +9,31 @@ module.exports = {
 	 * @param {ChatInputCommandInteraction} interaction 
 	 * @param {*} client 
 	 */
-	execute(interaction, client) {
-		
+	async execute(interaction, client) {
+
 		if (!interaction.isChatInputCommand()) return;
 
-		const command = client.commands.get(interaction.commandName);
+		// Economy Account
+		// let accountData;
 
-		if(!command)
+		// try {
+			// accountData = await accountSchema.findOne({ userId: interaction.user.id });
+
+		// 	if (!accountData) {
+				// accountData = await accountSchema.create({
+		// 			userId: interaction.user.id,
+		// 			coins: 0,
+		// 		});
+		// 	}
+		// } catch (err) {
+		// 	console.log(err);
+		// 	logHandler("error", "3", interaction.user.id, "", "", err);
+		// 	return interaction.reply({ content: "Failed to using economy command.", ephemeral: true });
+		// };
+
+		// Load Commands
+		const command = client.commands.get(interaction.commandName);
+		if (!command)
 			return interaction.reply({ content: "Outdated command! Please check in later.", ephemeral: true });
 
 		// Developer Commands

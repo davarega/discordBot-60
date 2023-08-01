@@ -18,11 +18,11 @@ module.exports = {
 					{ name: `Uploader:`, value: `**[${track.uploader.name}](${track.uploader.url})**`, inline: true },
 					{ name: `Requester:`, value: `${track.user}`, inline: true },
 					{ name: `Duration:`, value: `${track.formattedDuration}`, inline: true },
-					{ name: `Current Volume:`, value: `${newQueue.volume}%`, inline: true },
+					{ name: `Volume:`, value: `${newQueue.volume}%`, inline: true },
 					{ name: `Filters:`, value: `${newQueue.filters.names.join(", ") || "Normal"}`, inline: true },
 					{ name: `Autoplay:`, value: `${newQueue.autoplay ? "Activated" : "Not Active"}`, inline: true }
 				)
-				.addFields({ name: `Current Duration: \`[0:00 / ${track.formattedDuration}]\``, value: `\`\`\`🔴 | 🎶▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\`\`\``, inline: false })
+				.addFields({ name: `Current Duration: \`[0:00 / ${track.formattedDuration}]\``, value: `\`\`\`🔴 | 🧿▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\`\`\``, inline: false })
 				.setTimestamp()
 
 			await queue.textChannel.send({ embeds: [embed] });

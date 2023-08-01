@@ -17,6 +17,7 @@ module.exports = {
 
 		const emojis = {
 			// developer: "👨🏼‍💻",
+			economy: "💰",
 			fun: "🎉",
 			music: "🎵",
 			nsfw: "🔞",
