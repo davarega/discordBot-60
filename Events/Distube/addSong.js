@@ -6,7 +6,7 @@ module.exports = {
 
 	async execute(client, queue, track) {
 		const embed = new EmbedBuilder()
-			.setDescription(`**Queued • [${track.name}](${track.url})** \`${track.formattedDuration}\` • ${track.user}`)
+			.setDescription(`${track.user},  **Add • [${track.name}](${track.url})** \`${track.formattedDuration}\`  **• to queue **`)
 			.setColor('#000001');
 
 		queue.textChannel.send({ embeds: [embed] });

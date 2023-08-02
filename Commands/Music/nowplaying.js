@@ -5,7 +5,7 @@ const { logHandler } = require("../../Handlers/logHandler");
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("nowplaying")
-		.setDescription("Display info about the currently playing song."),
+		.setDescription("Show information about the track currently playing."),
 	/**
 	 * 
 	 * @param {ChatInputCommandInteraction} interaction 
@@ -20,8 +20,10 @@ module.exports = {
 
 		const queue = client.distube.getQueue(interaction);
 		if (!queue) {
+			embed.setColor('Red').setDescription("no one is playing music at this moment!");
+
 			logHandler("error", "0", user.tag, interaction.commandName, "", "no one is playing music at this moment");
-			return interaction.followUp(`no one is playing music at this moment!`);
+			return interaction.followUp({embeds: [embed], ephemeral: true});
 		};
 		
 		try {
@@ -72,7 +74,7 @@ module.exports = {
 
 		} catch (error) {
 			console.log(error);
-			embed.setColor('Red').setDescription("⛔ | Something went wrong... Please try again.");
+			embed.setColor('Red').setDescription("\`📛\` | Something went wrong... Please try again.");
 
 			logHandler("error", "1", user.tag, "", "", error);
 			return interaction.followUp({ embeds: [embed], ephemeral: true });

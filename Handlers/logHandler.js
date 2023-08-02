@@ -24,13 +24,14 @@ function logHandler(type = "undefined", msg = "0", user = "undefined", command =
 			`user: ${user.green} has successfully set the volume to: ${query.cyan}%`
 		],
 		"economy": [
-			`user: `
+			`user: ${user.green} has been successfully ${query.cyan} economy account`,
 		],
 		"error": [
 			`user: ${user.green} failed to use command: ${command.cyan}, because: ${error.red}`,
 			`user: ${user.green} failed to search: ${query.cyan}, because: ${error.red}`,
 			`user: ${user.green} failed to skip the music: ${query.cyan}, Error: ${error.red}`,
 			`user: ${user.green} failed to creating account/using economy command, because: ${error.red}`,
+			`user: ${user.green} failed to ${query.cyan} economy account, because: ${error.red}`
 		],
 		"undefined": ["undefined"],
 	}

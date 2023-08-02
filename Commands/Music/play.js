@@ -8,7 +8,7 @@ module.exports = {
 		.setDescription("Play a song.")
 		.addStringOption((option) =>
 			option.setName("query")
-				.setDescription("Query a song. (support youtube/spotify/soundcloud url)")
+				.setDescription("Query a song. Support youtube/spotify/soundcloud playlist and url.")
 				.setRequired(true)
 		),
 	/**
@@ -41,13 +41,13 @@ module.exports = {
 
 		try {
 			client.distube.play(voiceChannel, query, { textChannel: channel, member: member });
-			embed.setColor("Green").setDescription(`🔍 **Searching... \`${query}\`**`);
+			embed.setColor("Green").setDescription(`\`🔍\` | **Searching... \`${query}\`**`);
 
 			logHandler("distube", "0", user.tag, "", query);
 			return interaction.followUp({ embeds: [embed] })
 		} catch (error) {
 			console.log(error);
-			embed.setColor('Red').setDescription("⛔ | Something went wrong... Please try again.");
+			embed.setColor('Red').setDescription("\`📛\` | Something went wrong... Please try again.");
 
 			logHandler("error", "1", user.tag, "", query, error);
 			return interaction.followUp({ embeds: [embed], ephemeral: true });

@@ -17,7 +17,7 @@ const client = new Client({
 client.distube = new DisTube(client, {
 	leaveOnFinish: false,
 	leaveOnStop: false,
-	// emptyCooldown: 60,
+	emptyCooldown: 30,
 	plugins: [
 		new SpotifyPlugin(),
 		new SoundCloudPlugin(),

@@ -22,7 +22,7 @@ module.exports = {
 					{ name: `Filters:`, value: `${newQueue.filters.names.join(", ") || "Normal"}`, inline: true },
 					{ name: `Autoplay:`, value: `${newQueue.autoplay ? "Activated" : "Not Active"}`, inline: true }
 				)
-				.addFields({ name: `Current Duration: \`[0:00 / ${track.formattedDuration}]\``, value: `\`\`\`🔴 | 🧿▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\`\`\``, inline: false })
+				.addFields({ name: `Current Duration: \`[0:00 / ${track.formattedDuration}]\``, value: `\`\`\`🔴 | 🧿▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\`\`\``, inline: false })
 				.setTimestamp()
 
 			await queue.textChannel.send({ embeds: [embed] });
@@ -30,7 +30,7 @@ module.exports = {
 
 		} catch (error) {
 			console.log(error);
-			const embed = new EmbedBuilder().setColor('Red').setDescription("\`⛔ | Something went wrong... Please try again.\`");
+			const embed = new EmbedBuilder().setColor('Red').setDescription("\`📛\` | Something went wrong... Please try again.\`");
 
 			logHandler("error", "1", track.user.tag, "", track.name, error);
 			return queue.textChannel.send({ embeds: [embed] });

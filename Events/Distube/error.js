@@ -7,7 +7,7 @@ module.exports = {
 		if (channel) {
 			const embed = new EmbedBuilder()
 			.setColor('Red')
-			.setDescription(`❌ | An error encountered: ${e.toString().slice(0, 1974)}`);
+			.setDescription(`\`❌\` | An error encountered: ${e.toString().slice(0, 1974)}`);
 
 			queue.textChannel.send({ embeds: [embed] });
 		}

@@ -5,7 +5,7 @@ const { logHandler } = require('../../Handlers/logHandler');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("volume")
-		.setDescription("Set the volume for the songs.")
+		.setDescription("Set the playback volume for tracks.")
 		.addIntegerOption((option) =>
 			option.setName("percent")
 				.setDescription("Enter a volume from 1-100. example: 50 = 50%")
@@ -28,8 +28,10 @@ module.exports = {
 
 		const { channel } = member.voice;
 		if (!channel || member.voice.channel !== guild.members.me.voice.channel) {
+			embed.setDescription("\`🚨\` | You need to be in a same/voice channel.");
+			
 			logHandler("error", "0", user.tag, interaction.commandName, "", "user and bot not in the same/voice channel");
-			return interaction.followUp("You need to be in a same/voice channel.");
+			return interaction.followUp({ embeds: [embed], ephemeral: true });
 		};
 
 		const queue = client.distube.getQueue(interaction);
@@ -42,14 +44,14 @@ module.exports = {
 
 		try {
 			queue.setVolume(vol);
-			embed.setDescription(`🔉 | Volume set to \`${queue.volume}\``);
+			embed.setDescription(`\`🔉\` | Volume set to \`${queue.volume}\``);
 
 			logHandler("distube", "8", user.tag, "", `${queue.volume}`);
 			return interaction.followUp({ embeds: [embed], ephemeral: true });
 
 		} catch (error) {
 			console.log(error);
-			embed.setColor('Red').setDescription("⛔ | Something went wrong... Please try again.");
+			embed.setColor('Red').setDescription("\`📛\` | Something went wrong... Please try again.");
 
 			logHandler("error", "1", user.tag, "", "", error);
 			return interaction.followUp({ embeds: [embed], ephemeral: true });
