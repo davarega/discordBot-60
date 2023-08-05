@@ -17,7 +17,7 @@ module.exports = {
 		const embed = new EmbedBuilder()
 			.setColor("#000001")
 			.setAuthor({ name: "Invite!" })
-			.setDescription("```Invite me to your server!```")
+			.setDescription("```Invite skynara to your server!```")
 			.setTimestamp()
 			.setFooter({ text: `Requested by ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL() });
 

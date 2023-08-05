@@ -10,10 +10,11 @@ async function loadCommands(client) {
 	const commandsFolder = fs.readdirSync('./Commands');
 	for (const folder of commandsFolder) {
 		const commandFiles = fs
-			.readdirSync(`./Commands/${folder}`)
-			.filter((file) => file.endsWith(".js"));
-
+		.readdirSync(`./Commands/${folder}`)
+		.filter((file) => file.endsWith(".js"));
+		
 		for (const file of commandFiles) {
+			delete require.cache[require.resolve(`../Commands/${folder}/${file}`)];
 			const commandFile = require(`../Commands/${folder}/${file}`);
 
 			const properties = { folder, ...commandFile };

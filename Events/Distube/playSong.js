@@ -5,11 +5,12 @@ module.exports = {
 	name: "playSong",
 
 	async execute(client, queue, track) {
+		const embed = new EmbedBuilder();
+
 		try {
 			var newQueue = client.distube.getQueue(queue.id);
 
-			const embed = new EmbedBuilder()
-				.setAuthor({ name: `Starting Playing...`, iconURL: 'https://cdn.discordapp.com/emojis/741605543046807626.gif' })
+			embed.setAuthor({ name: `Starting Playing...`, iconURL: 'https://cdn.discordapp.com/emojis/741605543046807626.gif' })
 				.setThumbnail(track.thumbnail)
 				.setColor('#000001')
 				.setTitle(`${track.name || 'Unknown Title'}`)
@@ -17,10 +18,10 @@ module.exports = {
 				.addFields(
 					{ name: `Uploader:`, value: `**[${track.uploader.name}](${track.uploader.url})**`, inline: true },
 					{ name: `Requester:`, value: `${track.user}`, inline: true },
-					{ name: `Duration:`, value: `${track.formattedDuration}`, inline: true },
-					{ name: `Volume:`, value: `${newQueue.volume}%`, inline: true },
-					{ name: `Filters:`, value: `${newQueue.filters.names.join(", ") || "Normal"}`, inline: true },
-					{ name: `Autoplay:`, value: `${newQueue.autoplay ? "Activated" : "Not Active"}`, inline: true }
+					{ name: `Duration:`, value: `\`${track.formattedDuration}\``, inline: true },
+					{ name: `Volume:`, value: `\`${newQueue.volume}%\``, inline: true },
+					{ name: `Filters:`, value: `\`${newQueue.filters.names.join(", ") || "Normal"}\``, inline: true },
+					{ name: `Autoplay:`, value: `\`${newQueue.autoplay ? "On" : "Off"}\``, inline: true }
 				)
 				.addFields({ name: `Current Duration: \`[0:00 / ${track.formattedDuration}]\``, value: `\`\`\`🔴 | 🧿▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\`\`\``, inline: false })
 				.setTimestamp()
@@ -30,7 +31,7 @@ module.exports = {
 
 		} catch (error) {
 			console.log(error);
-			const embed = new EmbedBuilder().setColor('Red').setDescription("\`📛\` | Something went wrong... Please try again.\`");
+			embed.setColor('Red').setDescription("\`📛\` | Something went wrong... Please try again.\`");
 
 			logHandler("error", "1", track.user.tag, "", track.name, error);
 			return queue.textChannel.send({ embeds: [embed] });

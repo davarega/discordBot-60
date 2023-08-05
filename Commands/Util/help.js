@@ -4,7 +4,7 @@ const { logHandler } = require("../../Handlers/logHandler");
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("help")
-		.setDescription("Get a list of all the commands from the discord bot."),
+		.setDescription("Get a list of all the skynara commands."),
 	/**
 	 * 
 	 * @param {CommandInteraction} interaction 
@@ -12,11 +12,11 @@ module.exports = {
 	async execute(interaction) {
 		logHandler("client", "2", interaction.user.tag, interaction.commandName);
 		await interaction.deferReply();
-		
+
 		const { client, user, member } = interaction;
 
 		const emojis = {
-			// developer: "👨🏼‍💻",
+			developer: "👨🏼‍💻",
 			economy: "💰",
 			fun: "🎉",
 			music: "🎵",
@@ -55,9 +55,8 @@ module.exports = {
 		});
 
 		const embed = new EmbedBuilder()
-			.setDescription("See lists of commands by selecting a category down below!")
-			.setColor("#235ee7")
 			.setAuthor({ name: `${client.user.username}'s commands`, iconURL: client.user.avatarURL() })
+			.setDescription("See lists of commands by selecting a category down below!");
 
 		const components = (state) => [
 			new ActionRowBuilder().addComponents(
@@ -96,9 +95,8 @@ module.exports = {
 			);
 
 			const categoryEmbed = new EmbedBuilder()
-			.setTitle(`${emojis[directory.toLowerCase() || null]} ${formatString(directory)} commands`)
+				.setTitle(`${emojis[directory.toLowerCase() || null]} ${formatString(directory)} commands`)
 				.setDescription(`A list of all the commands categorized under ${directory}.`)
-				.setColor("#235ee7")
 				.addFields(
 					category.commands.map((cmd) => {
 						return {
@@ -109,11 +107,11 @@ module.exports = {
 					})
 				);
 
-				interaction.update({embeds: [categoryEmbed]});
+			interaction.update({ embeds: [categoryEmbed] });
 		}));
 
 		collector.on("end", () => {
-			initialMessage.edit({components: components(true)});
+			initialMessage.edit({ components: components(true) });
 		});
 		logHandler("client", "3", user.tag, interaction.commandName);
 	},

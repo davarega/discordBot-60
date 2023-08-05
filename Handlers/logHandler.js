@@ -1,8 +1,11 @@
+const { WebhookClient } = require('discord.js');
+const config = require('../config.json');
 require('colors');
 
 function logHandler(type = "undefined", msg = "0", user = "undefined", command = "undefined", query = "undefined", error = "undefined") {
+	logEmbed(type, msg, user, command, query, error)
 	const str = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
-	const logger = `[${str.slice(0, 18)}] `.yellow;
+	const logger = `[ ${str.slice(0, 17)} ] `;
 
 	var message = {
 		"client": [
@@ -25,18 +28,61 @@ function logHandler(type = "undefined", msg = "0", user = "undefined", command =
 		],
 		"economy": [
 			`user: ${user.green} has been successfully ${query.cyan} economy account`,
+			`user: ${user.green} successfully to buy: ${query.magenta}`
 		],
 		"error": [
 			`user: ${user.green} failed to use command: ${command.cyan}, because: ${error.red}`,
 			`user: ${user.green} failed to search: ${query.cyan}, because: ${error.red}`,
 			`user: ${user.green} failed to skip the music: ${query.cyan}, Error: ${error.red}`,
-			`user: ${user.green} failed to creating account/using economy command, because: ${error.red}`,
 			`user: ${user.green} failed to ${query.cyan} economy account, because: ${error.red}`
 		],
 		"undefined": ["undefined"],
-	}
+	};
+	const textResult = logger.yellow + message[type][msg];
 
-	console.log(logger + message[type][msg]);
+	console.log(textResult);
 };
+
+async function logEmbed(type, msg, user, command, query, error) {
+	const webhook = new WebhookClient({ url: config.webhook.console });
+	const dev = config.devUserID;
+	const str = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
+	const logger = `[ ${str.slice(0, 17)} ] `;
+
+	var message = {
+		"client": [
+			"[MONGODB]" + " database connected!",
+			`${user} is online now!`,
+			`user: ${user} is trying to use command: ${command}`,
+			`user: ${user} successfully used command: ${command}`,
+			`user: ${user} successfully search: ${query}, in command: ${command}`,
+		],
+		"distube": [
+			`user: ${user} searching query: ${query}`,
+			`user: ${user} now playing: ${query}`,
+			`user: ${user} skip the song: ${query}`,
+			`user: ${user}, now playing music, query: ${command}, source url: ${query}`,
+			`user: ${user} add song: ${query} to queue`,
+			`user: ${user} add song: ${query} to playlist`,
+			`user: ${user} pause the song: ${query}`,
+			`user: ${user} resume the song: ${query}`,
+			`user: ${user} has successfully set the volume to: ${query}%`
+		],
+		"economy": [
+			`user: ${user} has been successfully ${query} economy account`,
+			`user: ${user} successfully to buy: ${query}`
+		],
+		"error": [
+			`user: ${user} failed to use command: ${command}, because: ${error}`,
+			`<@${dev}> user: ${user} failed to search: ${query}, because: ${error}`,
+			`user: ${user} failed to skip the music: ${query}, Error: ${error}`,
+			`user: ${user} failed to ${query} economy account, because: ${error}`
+		],
+		"undefined": ["undefined"],
+	};
+	const textResult = logger + message[type][msg];
+
+	webhook.send(textResult);
+}
 
 module.exports = { logHandler };

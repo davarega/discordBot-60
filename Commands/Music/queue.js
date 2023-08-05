@@ -1,4 +1,5 @@
-const { SlashCommandBuilder, ChatInputCommandInteraction, Client, EmbedBuilder } = require("discord.js");
+const { SlashCommandBuilder, ChatInputCommandInteraction, EmbedBuilder } = require("discord.js");
+const client = require('../../index');
 const { logHandler } = require("../../Handlers/logHandler");
 
 module.exports = {
@@ -8,7 +9,7 @@ module.exports = {
 	/**
 	 * 
 	 * @param {ChatInputCommandInteraction} interaction 
-	 * @param {Client} client 
+	 * @param {client} client 
 	 */
 	async execute(interaction, client) {
 		logHandler("client", "2", interaction.user.tag, interaction.commandName);
@@ -19,7 +20,7 @@ module.exports = {
 
 		const queue = client.distube.getQueue(interaction);
 		if (!queue) {
-			embed.setColor('Red').setDescription("no one is playing music at this moment!");
+			embed.setDescription("\`📛\` | no one is playing music at this moment!");
 
 			logHandler("error", "0", user.tag, interaction.commandName, "", "no one is playing music at this moment");
 			return interaction.followUp({ embeds: [embed], ephemeral: true });
@@ -27,7 +28,7 @@ module.exports = {
 
 		try {
 			const track = queue.songs.map((song, i) => {
-				return `${i === 0 ? "Now Playing:" : `${i}.`} [${song.name}](${song.url}) - \`${song.formattedDuration}\` • ${song.user}`
+				return `${i === 0 ? "Now Playing:" : `${i}.`} Next songs: [${song.name}](${song.url}) - \`${song.formattedDuration}\` • ${song.user}`
 			}).join("\n");
 
 			embed.setAuthor({ name: "📑 Queue List" })

@@ -32,19 +32,19 @@ module.exports = {
 		switch (option) {
 			case "create": {
 				if (data) {
-					embed.setColor('Red').setDescription("You already have an economy account.");
+					embed.setDescription("\`📛\` | You already have an economy account.");
 
-					logHandler("error", "4", user.tag, "", option, "user already have economy account.");
+					logHandler("error", "3", user.tag, "", option, "user already have economy account.");
 					return interaction.followUp({ embeds: [embed], ephemeral: true });
 				}
 
 				data = new accountSchema({
 					userId: user.id,
-					coins: 0,
+					coins: 1,
 				});
 
 				await data.save();
-				embed.setDescription("Your account has been successfully created!");
+				embed.setDescription("\`💳\` | Your account has been successfully created!\nAnd you get \`1\`:coin: Naracoin.");
 
 				logHandler("economy", "0", user.tag, "", option);
 				interaction.followUp({ embeds: [embed], ephemeral: true });
@@ -52,14 +52,14 @@ module.exports = {
 				break;
 			case "delete": {
 				if (!data) {
-					embed.setColor('Red').setDescription("Please type **/account** to create your economy account");
+					embed.setDescription("\`📛\` | Please type **/account** to create your economy account");
 
-					logHandler("error", "4", user.tag, "", option, "user no have economy account.");
+					logHandler("error", "3", user.tag, "", option, "user no have economy account.");
 					return interaction.followUp({ embeds: [embed], ephemeral: true });
 				};
 
 				await data.deleteOne();
-				embed.setDescription("Your account has been successfully deleted!");
+				embed.setDescription("\`💳\` | Your account has been successfully deleted!");
 
 				logHandler("economy", "0", user.tag, "", option);
 				interaction.followUp({ embeds: [embed], ephemeral: true });

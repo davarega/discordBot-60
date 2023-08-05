@@ -3,6 +3,7 @@ const client = require('../../index');
 const { logHandler } = require('../../Handlers/logHandler');
 
 module.exports = {
+	sameVoiceChannel: true,
 	data: new SlashCommandBuilder()
 		.setName("volume")
 		.setDescription("Set the playback volume for tracks.")
@@ -22,19 +23,11 @@ module.exports = {
 		logHandler("client", "2", interaction.user.tag, interaction.commandName);
 		await interaction.deferReply();
 
-		const { member, guild, user, options } = interaction;
+		const { user, options } = interaction;
 		const vol = options.getInteger("percent");
 		const embed = new EmbedBuilder();
-
-		const { channel } = member.voice;
-		if (!channel || member.voice.channel !== guild.members.me.voice.channel) {
-			embed.setDescription("\`🚨\` | You need to be in a same/voice channel.");
-			
-			logHandler("error", "0", user.tag, interaction.commandName, "", "user and bot not in the same/voice channel");
-			return interaction.followUp({ embeds: [embed], ephemeral: true });
-		};
-
 		const queue = client.distube.getQueue(interaction);
+		
 		if (!queue) {
 			embed.setDescription("\`🚨\` | **There are no** `Songs` **in queue**");
 

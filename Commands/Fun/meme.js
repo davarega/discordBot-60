@@ -5,7 +5,7 @@ const { logHandler } = require("../../Handlers/logHandler");
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("meme")
-		.setDescription("Sending meme image."),
+		.setDescription("Sending meme image from reddit."),
 	/**
 	 * 
 	 * @param {ChatInputCommandInteraction} interaction 
@@ -14,6 +14,7 @@ module.exports = {
 		logHandler("client", "2", interaction.user.tag, interaction.commandName);
 		await interaction.deferReply();
 
+		const { user } = interaction;
 		const embed = new EmbedBuilder();
 
 		try {
@@ -26,13 +27,13 @@ module.exports = {
 				.setTimestamp()
 				.setFooter({ text: `👍🏼 ${data.ups} 💬 0 ` });
 
-				logHandler("client", "3", interaction.user.tag, interaction.commandName);
+				logHandler("client", "3", user.tag, interaction.commandName);
 			return interaction.followUp({ embeds: [embed] });
 		} catch (error) {
 			console.log(error);
-			embed.setColor('Red').setDescription("\`📛\` | Something went wrong...");
+			embed.setColor('Red').setDescription("\`📛\` | Something went wrong... Please try again");
 
-			logHandler("error", "0", interaction.user.tag, interaction.commandName, "", error);
+			logHandler("error", "0", user.tag, interaction.commandName, "", error);
 			return interaction.followUp({ embeds: [embed], ephemeral: true });
 		};
 	}

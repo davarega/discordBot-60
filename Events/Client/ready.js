@@ -1,11 +1,15 @@
 const mongoose = require('mongoose');
+const client = require('../../index.js')
 const { logHandler } = require('../../Handlers/logHandler');
 require('colors');
 
 module.exports = {
 	name: "ready",
 	once: true,
-
+	/**
+	 * 
+	 * @param {client} client 
+	 */
 	async execute(client) {
 		await mongoose.connect(process.env.MONGO_DB || "", {
 			useNewUrlParser: true,

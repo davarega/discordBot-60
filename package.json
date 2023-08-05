@@ -25,6 +25,7 @@
     "ffmpeg-static": "^5.1.0",
     "libsodium-wrappers": "^0.7.11",
     "mongoose": "^7.4.0",
-    "parse-ms-2": "^1.0.0"
+    "parse-ms-2": "^1.0.0",
+    "util": "^0.12.5"
   }
 }

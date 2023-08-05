@@ -26,8 +26,11 @@ client.distube = new DisTube(client, {
 });
 
 client.commands = new Collection();
+client.config = require('./config.json');
 
 module.exports = client;
+
+require('./Handlers/antiCrash')(client);
 
 client.login(process.env.CLIENT_TOKEN).then(() => {
 	loadCommands(client);

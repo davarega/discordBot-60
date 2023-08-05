@@ -5,7 +5,7 @@ const { logHandler } = require('../../Handlers/logHandler');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("status")
-		.setDescription("Displays the status of the bot."),
+		.setDescription("Displays the skynara status."),
 	/**
 	 * 
 	 * @param {CommandInteraction} interaction 
@@ -15,15 +15,15 @@ module.exports = {
 	async execute(interaction, client) {
 		logHandler("client", "2", interaction.user.tag, interaction.commandName);
 		await interaction.deferReply();
-		
+
+		const embed = new EmbedBuilder();
 		try {
 			const status = ["Disconnected", "Connected", "Connecting", "Disconnecting"];
 
 			await client.user.fetch();
 			await client.application.fetch();
 
-			const embed = new EmbedBuilder()
-				.setTitle(`🤖 ${client.user.username} Status`)
+			embed.setTitle(`\`🤖\` | ${client.user.username} Status`)
 				.setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
 				.setDescription(client.application.description || null)
 				.addFields(
@@ -45,9 +45,9 @@ module.exports = {
 			return interaction.followUp({ embeds: [embed] });
 		} catch (error) {
 			console.log(error);
-			const embed = new EmbedBuilder().setColor('Red').setDescription("\`📛\` | Something went wrong... Please try again.");
+			embed.setColor('Red').setDescription("\`📛\` | Something went wrong... Please try again.");
 
-			logHandler("error", "0", interaction.user.tag, interaction.commandName, "",error);
+			logHandler("error", "0", interaction.user.tag, interaction.commandName, "", error);
 			return interaction.followUp({ embeds: [embed], ephemeral: true });
 		}
 	}
