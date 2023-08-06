@@ -18,10 +18,10 @@ function logHandler(type = "undefined", msg = "0", user = "undefined", command =
 		"distube": [
 			`user: ${user.green} searching query: ${query.cyan}`,
 			`user: ${user.green} now playing: ${query.cyan}`,
-			`user: ${user.green} skip the song: ${query.cyan}`,
+			`user: ${user.green} skip the song: ${command.cyan} to skip number: ${query.green}`,
 			`user: ${user.green}, now playing music, query: ${command.cyan}, source url: ${query.blue}`,
 			`user: ${user.green} add song: ${query.cyan} to queue`,
-			`user: ${user.green} add song: ${query.cyan} to playlist`,
+			`user: ${user.green} add song: ${command.cyan} to playlist (${query.blue})`,
 			`user: ${user.green} pause the song: ${query.cyan}`,
 			`user: ${user.green} resume the song: ${query.cyan}`,
 			`user: ${user.green} has successfully set the volume to: ${query.cyan}%`
@@ -60,10 +60,10 @@ async function logEmbed(type, msg, user, command, query, error) {
 		"distube": [
 			`user: ${user} searching query: ${query}`,
 			`user: ${user} now playing: ${query}`,
-			`user: ${user} skip the song: ${query}`,
+			`user: ${user} skip the song: ${query} to skip number: ${query}`,
 			`user: ${user}, now playing music, query: ${command}, source url: ${query}`,
 			`user: ${user} add song: ${query} to queue`,
-			`user: ${user} add song: ${query} to playlist`,
+			`user: ${user} add song: ${command} to playlist (${query})`,
 			`user: ${user} pause the song: ${query}`,
 			`user: ${user} resume the song: ${query}`,
 			`user: ${user} has successfully set the volume to: ${query}%`

@@ -1,12 +1,13 @@
 const { SlashCommandBuilder, ChatInputCommandInteraction, EmbedBuilder } = require("discord.js");
 const client = require('../../index');
 const { logHandler } = require('../../Handlers/logHandler');
+const { errorEmbed } = require("../../Handlers/messageEmbed");
 
 module.exports = {
 	sameVoiceChannel: true,
 	data: new SlashCommandBuilder()
 		.setName("volume")
-		.setDescription("Set the playback volume for tracks.")
+		.setDescription("Set the playback volume for songs.")
 		.addIntegerOption((option) =>
 			option.setName("percent")
 				.setDescription("Enter a volume from 1-100. example: 50 = 50%")
@@ -44,10 +45,9 @@ module.exports = {
 
 		} catch (error) {
 			console.log(error);
-			embed.setColor('Red').setDescription("\`📛\` | Something went wrong... Please try again.");
 
 			logHandler("error", "1", user.tag, "", "", error);
-			return interaction.followUp({ embeds: [embed], ephemeral: true });
+			return interaction.followUp({ embeds: [errorEmbed], ephemeral: true });
 		};
 	}
 };

@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, ChatInputCommandInteraction, EmbedBuilder } = require("discord.js");
 const client = require('../../index');
 const { logHandler } = require('../../Handlers/logHandler');
+const { errorEmbed } = require("../../Handlers/messageEmbed");
 
 module.exports = {
 	sameVoiceChannel: true,
@@ -8,10 +9,10 @@ module.exports = {
 		.setName("skip")
 		.setDescription("Skips the song currently playing.")
 		.addIntegerOption(option =>
-			option.setName("tracknumber")
-				.setDescription("Track number to skip to in the queue.")
+			option.setName("songnumber")
+				.setDescription("Song number to skip to in the queue. Type /queue to show all songs in playlist")
 				.setRequired(false)
-				.setMinValue(1)
+				.setMinValue(2)
 		),
 	/**
 	 * 
@@ -23,7 +24,7 @@ module.exports = {
 		await interaction.deferReply();
 
 		const { user, options } = interaction;
-		const trackNumber = options.getInteger("tracknumber");
+		const songNumber = options.getInteger("songnumber");
 		const embed = new EmbedBuilder();
 		const queue = client.distube.getQueue(interaction);
 
@@ -39,31 +40,32 @@ module.exports = {
 			logHandler("error", "0", user.tag, interaction.commandName, "", "there are no songs in queue");
 			return interaction.followUp({ embeds: [embed] });
 			
-		} else if (trackNumber > queue.songs.length - 1) {
-			embed.setDescription(`\`🚨\` | There are only \`${queue.tracks.data.length}\` tracks in the queue. You cannot skip to track \`${queue.songs.length - 1}\`.`);
-			return logHandler("error", "0", user.tag, interaction.commandName, "", "Track number was higher than total tracks.");
+		} else if (songNumber > queue.songs.length) {
+			embed.setDescription(`\`🚨\` | There are only \`${queue.songs.length}\` songs in the queue. You cannot skip to song \`${queue.songs.length}\`.`);
+			
+			logHandler("error", "0", user.tag, interaction.commandName, "", "songs number was higher than total songs.");
+			return interaction.followUp({ embeds: [embed] });
 		};
 
 		try {
-			if (trackNumber) {
-				await queue.jump(trackNumber);
-				embed.setTitle(`\`⏭\` | **Jumped to position: \`${trackNumber}\` in the Queue!**`).setTimestamp();
+			if (songNumber) {
+				await queue.jump(songNumber - 1);
+				embed.setTitle(`\`⏭\` | **Jumped to position: \`${songNumber}\` in the Queue!**`).setTimestamp();
 
 				logHandler("distube", "2", user.tag, "", queue.songs[0].name);
 			} else {
 				await client.distube.skip(interaction);
 				embed.setDescription("\`⏭\` | **Song has been:** `Skipped`")
 
-				logHandler("distube", "2", user.tag, "", queue.songs[0].name);
+				logHandler("distube", "2", user.tag, queue.songs[0].name, songNumber);
 			};
 			return interaction.followUp({ embeds: [embed] });
 
 		} catch (error) {
 			console.log(error);
-			embed.setColor('Red').setDescription("\`📛\` | Something went wrong... Please try again.");
 
 			logHandler("error", "1", user.tag, "", "", error);
-			return interaction.followUp({ embeds: [embed], ephemeral: true });
+			return interaction.followUp({ embeds: [errorEmbed], ephemeral: true });
 		};
 	}
 };

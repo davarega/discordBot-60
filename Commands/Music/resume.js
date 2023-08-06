@@ -1,12 +1,13 @@
 const { SlashCommandBuilder, ChatInputCommandInteraction, EmbedBuilder } = require("discord.js");
 const client = require('../../index');
 const { logHandler } = require('../../Handlers/logHandler');
+const { errorEmbed } = require("../../Handlers/messageEmbed");
 
 module.exports = {
 	sameVoiceChannel: true,
 	data: new SlashCommandBuilder()
 		.setName("resume")
-		.setDescription("Resume the current track."),
+		.setDescription("Resume the current song."),
 	/**
 	 * 
 	 * @param {ChatInputCommandInteraction} interaction 
@@ -44,10 +45,9 @@ module.exports = {
 
 		} catch (error) {
 			console.log(error);
-			embed.setColor('Red').setDescription("\`📛\` | Something went wrong... Please try again.");
 
 			logHandler("error", "1", user.tag, "", "", error);
-			return interaction.followUp({ embeds: [embed], ephemeral: true });
+			return interaction.followUp({ embeds: [errorEmbed], ephemeral: true });
 		};
 	}
 };

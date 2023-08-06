@@ -24,7 +24,6 @@ module.exports = {
 
 		// ========== Developer Commands ==========
 		if (command.developer && interaction.user.id !== client.config.devUserID && interaction.guild.id !== client.config.devGuildID) {
-			
 			logHandler("error", "0", user.tag, interaction.commandName, "", "user try developer command");
 			return interaction.reply({ content: "\`📛\` | This command is only for the SkyNara bot developer!", ephemeral: true });
 		};

@@ -2,6 +2,7 @@ const { SlashCommandBuilder, ChatInputCommandInteraction, EmbedBuilder } = requi
 const client = require('../../index');
 const accountSchema = require('../../Models/accountSchema');
 const { logHandler } = require('../../Handlers/logHandler');
+const { errorEmbed } = require('../../Handlers/messageEmbed');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -17,17 +18,20 @@ module.exports = {
 		logHandler("client", "2", interaction.user.tag, interaction.commandName);
 		await interaction.deferReply();
 
-		const { member, user } = interaction;
+		const { user } = interaction;
 		const embed = new EmbedBuilder();
 		const data = await accountSchema.findOne({ userId: user.id });
-		const queue = client.distube.getQueue(interaction);
-
+		
 		if(!data.tags.includes(interaction.commandName)) {
 			embed.setDescription("\`📛\` | You don't have permission to use this command.\nYou can type **/shop** to see/buy permission for sale.")
+			
 			logHandler("error", "0", user.tag, interaction.commandName, "", `user no have ${interaction.commandName} tag`);
-			return interaction.followUp({ content: "masuk" });
+			return interaction.followUp({ embeds: [embed] });
 
-		} else if (!queue) {
+		};
+		
+		const queue = client.distube.getQueue(interaction);
+		if (!queue) {
 			embed.setDescription("\`📛\` | **No one is playing music right now!**");
 
 			logHandler("error", "0", user.tag, interaction.commandName, "", "there are no songs in queue");
@@ -43,10 +47,9 @@ module.exports = {
 
 		} catch (error) {
 			console.log(error);
-			embed.setColor('Red').setDescription("\`📛\` | Something went wrong... Please try again.");
 
 			logHandler("error", "1", user.tag, "", "", error);
-			return interaction.followUp({ embeds: [embed], ephemeral: true });
+			return interaction.followUp({ embeds: [errorEmbed], ephemeral: true });
 		};
 	}
 }
