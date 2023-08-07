@@ -1,4 +1,4 @@
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, CommandInteraction, EmbedBuilder, SlashCommandBuilder } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const client = require('../../index');
 const { logHandler } = require('../../Handlers/logHandler');
 
@@ -8,7 +8,7 @@ module.exports = {
 		.setDescription("Invite bot to your server."),
 	/**
 	 * 
-	 * @param {CommandInteraction} interaction 
+	 * @param {ChatInputCommandInteraction} interaction 
 	 */
 	async execute(interaction) {
 		logHandler("client", "2", interaction.user.tag, interaction.commandName);

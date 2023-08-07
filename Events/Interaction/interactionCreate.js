@@ -24,8 +24,10 @@ module.exports = {
 
 		// ========== Developer Commands ==========
 		if (command.developer && interaction.user.id !== client.config.devUserID && interaction.guild.id !== client.config.devGuildID) {
+			embed.setDescription("\`📛\` | This command is only for the SkyNara bot developer!");
+
 			logHandler("error", "0", user.tag, interaction.commandName, "", "user try developer command");
-			return interaction.reply({ content: "\`📛\` | This command is only for the SkyNara bot developer!", ephemeral: true });
+			return interaction.reply({ embeds: [embed], ephemeral: true });
 		};
 
 		// ========== Voice Channel Check ==========
@@ -40,7 +42,7 @@ module.exports = {
 			embed.setDescription("\`🚨\` | You need to be in a same/voice channel.");
 			
 			logHandler("error", "0", user.tag, interaction.commandName, "", "user and bot not in the same/voice channel");
-			return interaction.followUp({ embeds: [embed], ephemeral: true });
+			return interaction.reply({ embeds: [embed], ephemeral: true });
 		}
 
 		// ========== Economy Commands ==========

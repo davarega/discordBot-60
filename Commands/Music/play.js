@@ -1,4 +1,4 @@
-const { CommandInteraction, EmbedBuilder, SlashCommandBuilder } = require('discord.js');
+const { ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const client = require('../../index');
 const { logHandler } = require('../../Handlers/logHandler');
 const { errorEmbed } = require('../../Handlers/messageEmbed');
@@ -15,9 +15,10 @@ module.exports = {
 		),
 	/**
 	 * 
-	 * @param {CommandInteraction} interaction 
+	 * @param {ChatInputCommandInteraction} interaction 
+	 * @param {client} client 
 	 */
-	async execute(interaction) {
+	async execute(interaction, client) {
 		logHandler("client", "2", interaction.user.tag, interaction.commandName);
 		await interaction.deferReply();
 
@@ -33,26 +34,18 @@ module.exports = {
 			return interaction.followUp({ embeds: [embed], ephemeral: true });
 		};
 
-		embed.setColor("Green").setDescription(`\`🔍\` | **Searching... \`${query}\`**`);
-		interaction.followUp({ embeds: [embed] });
-
 		try {
-			const playing = await client.distube.play(voiceChannel, query, { textChannel: channel, member: member });
+			embed.setColor("Green").setDescription(`\`🔍\` | **Searching... \`${query}\`**`);
+			client.distube.play(voiceChannel, query, { textChannel: channel, member: member });
 
-			if (playing) {
-				logHandler("distube", "0", user.tag, "", query);
-			} else {
-				embed.setColor('Red').setDescription("\`📛\` | Link not found.");
-
-				logHandler("error", "1", user.tag, "", query, "link not found");
-				return interaction.followUp({ embeds: [embed], ephemeral: true });
-			};
+			logHandler("distube", "0", user.tag, "", query);
+			return interaction.followUp({ embeds: [embed] });
 
 		} catch (error) {
 			const problem1 = "\nInvalid url link. Make sure the url link you provided is correct.";
 			const problem2 = "\nYour url link contains sensitive content. Sorry I can't play sensitive content.";
 
-			console.log(error)
+			console.log(error);
 			errorEmbed.setDescription(`Hi there! **These links aren't supported**. Some possible problems:${problem1 + problem2}`);
 
 			logHandler("error", "1", user.tag, "", query, error);

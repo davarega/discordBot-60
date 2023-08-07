@@ -4,6 +4,7 @@ const { logHandler } = require('../../Handlers/logHandler');
 const { errorEmbed } = require("../../Handlers/messageEmbed");
 
 module.exports = {
+	inVoiceChannel: true,
 	sameVoiceChannel: true,
 	data: new SlashCommandBuilder()
 		.setName("skip")
@@ -29,22 +30,22 @@ module.exports = {
 		const queue = client.distube.getQueue(interaction);
 
 		if (!queue) {
-			embed.setDescription("\`📛\` | **There are no** `Songs` **in queue**");
+			embed.setDescription("\`📛\` | **No one is playing music right now!**");
 
-			logHandler("error", "0", user.tag, interaction.commandName, "", "there are no songs in queue");
-			return interaction.followUp({ embeds: [embed] });
+			logHandler("error", "0", user.tag, interaction.commandName, "", "no one is playing music at this moment");
+			return interaction.followUp({ embeds: [embed], ephemeral: true });
 
 		} else if (queue.songs.length === 1 && queue.autoplay === false) {
 			embed.setDescription("\`🚨\` | **There are no** `Songs` **in queue**");
 
 			logHandler("error", "0", user.tag, interaction.commandName, "", "there are no songs in queue");
-			return interaction.followUp({ embeds: [embed] });
+			return interaction.followUp({ embeds: [embed], ephemeral: true });
 			
 		} else if (songNumber > queue.songs.length) {
-			embed.setDescription(`\`🚨\` | There are only \`${queue.songs.length}\` songs in the queue. You cannot skip to song \`${queue.songs.length}\`.`);
+			embed.setDescription(`\`🚨\` | There are only \`${queue.songs.length}\` songs in the queue. You cannot skip to song \`${songNumber - 1}\`.`);
 			
 			logHandler("error", "0", user.tag, interaction.commandName, "", "songs number was higher than total songs.");
-			return interaction.followUp({ embeds: [embed] });
+			return interaction.followUp({ embeds: [embed], ephemeral: true });
 		};
 
 		try {
@@ -52,12 +53,12 @@ module.exports = {
 				await queue.jump(songNumber - 1);
 				embed.setTitle(`\`⏭\` | **Jumped to position: \`${songNumber}\` in the Queue!**`).setTimestamp();
 
-				logHandler("distube", "2", user.tag, "", queue.songs[0].name);
+				logHandler("distube", "2", user.tag, queue.songs[0].name, songNumber);
 			} else {
 				await client.distube.skip(interaction);
-				embed.setDescription("\`⏭\` | **Song has been:** `Skipped`")
+				embed.setDescription("\`⏩\` | **Song has been:** `Skipped`")
 
-				logHandler("distube", "2", user.tag, queue.songs[0].name, songNumber);
+				logHandler("distube", "2", user.tag, queue.songs[0].name, "2");
 			};
 			return interaction.followUp({ embeds: [embed] });
 

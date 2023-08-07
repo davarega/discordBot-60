@@ -2,6 +2,7 @@ const { WebhookClient } = require('discord.js');
 const config = require('../config.json');
 require('colors');
 
+
 function logHandler(type = "undefined", msg = "0", user = "undefined", command = "undefined", query = "undefined", error = "undefined") {
 	logEmbed(type, msg, user, command, query, error)
 	const str = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
@@ -24,7 +25,8 @@ function logHandler(type = "undefined", msg = "0", user = "undefined", command =
 			`user: ${user.green} add song: ${command.cyan} to playlist (${query.blue})`,
 			`user: ${user.green} pause the song: ${query.cyan}`,
 			`user: ${user.green} resume the song: ${query.cyan}`,
-			`user: ${user.green} has successfully set the volume to: ${query.cyan}%`
+			`user: ${user.green} has successfully set the volume to: ${query.cyan}%`,
+			`user: ${user.green} has successfilly set the loop mode to: ${query.cyan}`
 		],
 		"economy": [
 			`user: ${user.green} has been successfully ${query.cyan} economy account`,
@@ -33,7 +35,6 @@ function logHandler(type = "undefined", msg = "0", user = "undefined", command =
 		"error": [
 			`user: ${user.green} failed to use command: ${command.cyan}, because: ${error.red}`,
 			`user: ${user.green} failed to search: ${query.cyan}, because: ${error.red}`,
-			`user: ${user.green} failed to skip the music: ${query.cyan}, Error: ${error.red}`,
 			`user: ${user.green} failed to ${query.cyan} economy account, because: ${error.red}`
 		],
 		"undefined": ["undefined"],
@@ -51,8 +52,8 @@ async function logEmbed(type, msg, user, command, query, error) {
 
 	var message = {
 		"client": [
-			"[MONGODB]" + " database connected!",
-			`${user} is online now!`,
+			`<@${dev}> [MONGODB] database connected!`,
+			`<@${dev}> ${user} is online now!`,
 			`user: ${user} is trying to use command: ${command}`,
 			`user: ${user} successfully used command: ${command}`,
 			`user: ${user} successfully search: ${query}, in command: ${command}`,
@@ -66,7 +67,8 @@ async function logEmbed(type, msg, user, command, query, error) {
 			`user: ${user} add song: ${command} to playlist (${query})`,
 			`user: ${user} pause the song: ${query}`,
 			`user: ${user} resume the song: ${query}`,
-			`user: ${user} has successfully set the volume to: ${query}%`
+			`user: ${user} has successfully set the volume to: ${query}%`,
+			`user: ${user} has successfilly set the loop mode to: ${query}`
 		],
 		"economy": [
 			`user: ${user} has been successfully ${query} economy account`,
@@ -75,10 +77,9 @@ async function logEmbed(type, msg, user, command, query, error) {
 		"error": [
 			`user: ${user} failed to use command: ${command}, because: ${error}`,
 			`<@${dev}> user: ${user} failed to search: ${query}, because: ${error}`,
-			`user: ${user} failed to skip the music: ${query}, Error: ${error}`,
 			`user: ${user} failed to ${query} economy account, because: ${error}`
 		],
-		"undefined": ["undefined"],
+		"undefined": ["undefined"]
 	};
 	const textResult = logger + message[type][msg];
 

@@ -34,7 +34,7 @@ module.exports = {
 				if (data) {
 					embed.setDescription("\`📛\` | You already have an economy account.");
 
-					logHandler("error", "3", user.tag, "", option, "user already have economy account.");
+					logHandler("error", "2", user.tag, "", option, "user already have economy account.");
 					return interaction.followUp({ embeds: [embed], ephemeral: true });
 				}
 
@@ -54,7 +54,7 @@ module.exports = {
 				if (!data) {
 					embed.setDescription("\`📛\` | Please type **/account** to create your economy account");
 
-					logHandler("error", "3", user.tag, "", option, "user no have economy account.");
+					logHandler("error", "2", user.tag, "", option, "user no have economy account.");
 					return interaction.followUp({ embeds: [embed], ephemeral: true });
 				};
 

@@ -1,4 +1,4 @@
-const { Client, CommandInteraction, EmbedBuilder, SlashCommandBuilder, UserFlags, version } = require('discord.js');
+const { Client, ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder, UserFlags, version } = require('discord.js');
 const { connection } = require('mongoose');
 const { logHandler } = require('../../Handlers/logHandler');
 const { errorEmbed } = require('../../Handlers/messageEmbed');
@@ -9,7 +9,7 @@ module.exports = {
 		.setDescription("Displays the skynara status."),
 	/**
 	 * 
-	 * @param {CommandInteraction} interaction 
+	 * @param {ChatInputCommandInteraction} interaction 
 	 * @param {Client} client 
 	 * @returns 
 	 */

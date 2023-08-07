@@ -16,9 +16,11 @@ module.exports = {
 		logHandler("client", "2", interaction.user.tag, interaction.commandName);
 		await interaction.deferReply();
 
-		const { member, user } = interaction;
+		const { user } = interaction;
+		const embed = new EmbedBuilder();
 
 		const queue = client.distube.getQueue(interaction);
+
 		if (!queue) {
 			embed.setDescription("\`📛\` | **No one is playing music right now!**");
 
@@ -26,7 +28,7 @@ module.exports = {
 			return interaction.followUp({ embeds: [embed], ephemeral: true });
 		};
 
-		const embed = new EmbedBuilder()
+		embed
 			.setAuthor({ name: queue.songs[0].playing ? 'Song Pause...' : 'Now Playing...', iconURL: "https://cdn.discordapp.com/emojis/741605543046807626.gif" })
 			.setColor('#000001')
 			.setTitle(`${queue.songs[0].name || 'Unknown Title'}`)

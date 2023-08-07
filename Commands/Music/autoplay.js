@@ -26,16 +26,15 @@ module.exports = {
 			embed.setDescription("\`📛\` | You don't have permission to use this command.\nYou can type **/shop** to see/buy permission for sale.")
 			
 			logHandler("error", "0", user.tag, interaction.commandName, "", `user no have ${interaction.commandName} tag`);
-			return interaction.followUp({ embeds: [embed] });
-
+			return interaction.followUp({ embeds: [embed], ephemeral: true });
 		};
-		
+
 		const queue = client.distube.getQueue(interaction);
 		if (!queue) {
 			embed.setDescription("\`📛\` | **No one is playing music right now!**");
 
-			logHandler("error", "0", user.tag, interaction.commandName, "", "there are no songs in queue");
-			return interaction.followUp({ embeds: [embed] });
+			logHandler("error", "0", user.tag, interaction.commandName, "", "no one is playing music at this moment");
+			return interaction.followUp({ embeds: [embed], ephemeral: true });
 		};
 
 		try {

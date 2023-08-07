@@ -6,8 +6,8 @@ module.exports = {
 
 	async execute(client, queue, playlist) {
 		const embed = new EmbedBuilder()
+			.setColor(client.color)
 			.setDescription(`${playlist.user},  **Add • [${playlist.name}](${playlist.url})** \`${queue.formattedDuration}\` **(${playlist.songs.length} songs) • to queue**`)
-			.setColor('#000001');
 
 		queue.textChannel.send({ embeds: [embed] });
 		logHandler("distube", "5", playlist.user.tag, playlist.name, playlist.songs.length);

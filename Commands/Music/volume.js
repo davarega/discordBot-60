@@ -4,6 +4,7 @@ const { logHandler } = require('../../Handlers/logHandler');
 const { errorEmbed } = require("../../Handlers/messageEmbed");
 
 module.exports = {
+	inVoiceChannel: true,
 	sameVoiceChannel: true,
 	data: new SlashCommandBuilder()
 		.setName("volume")
@@ -30,10 +31,10 @@ module.exports = {
 		const queue = client.distube.getQueue(interaction);
 		
 		if (!queue) {
-			embed.setDescription("\`🚨\` | **There are no** `Songs` **in queue**");
+			embed.setDescription("\`📛\` | **No one is playing music right now!**");
 
-			logHandler("error", "0", user.tag, interaction.commandName, "", "there are no songs in queue");
-			return interaction.followUp({ embeds: [embed] });
+			logHandler("error", "0", user.tag, interaction.commandName, "", "no one is playing music at this moment");
+			return interaction.followUp({ embeds: [embed], ephemeral: true });
 		};
 
 		try {

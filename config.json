@@ -1,4 +1,5 @@
 {
+	"color": "#000001",
 	"devUserID": "529274140801105920",
 	"devGuildID": "876346848686788658",
 	"logChannel": "997481265299202108",
@@ -10,5 +11,16 @@
 	"shopList": [
 		{"name": "Autoplay", "price": "10"},
 		{"name": "Filter", "price": "5"}
-	]
+	],
+	"emoji": {
+		"error": "❌",
+		"success": "✅",
+		"warn": "📛",
+		"play": "▶",
+		"pause": "⏸",
+		"skip": "⏩",
+		"jump": "⏭",
+		"coin": "🪙",
+		"nsfw": "🔞"
+	}
 }

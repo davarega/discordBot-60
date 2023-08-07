@@ -1,6 +1,7 @@
 const { Client, GatewayIntentBits, Partials, Collection } = require('discord.js');
 const { DisTube } = require('distube');
 require('dotenv').config();
+const config = require('./config.json');
 
 const { loadCommands } = require('./Handlers/commandHandler');
 const { loadEvents } = require('./Handlers/eventHandler');
@@ -26,7 +27,9 @@ client.distube = new DisTube(client, {
 });
 
 client.commands = new Collection();
-client.config = require('./config.json');
+client.color = config.color;
+client.owner = config.devUserID;
+client.emoji = config.emoji;
 
 module.exports = client;
 

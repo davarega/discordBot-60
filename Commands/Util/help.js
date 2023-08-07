@@ -1,4 +1,4 @@
-const { CommandInteraction, SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ComponentType } = require("discord.js");
+const { ChatInputCommandInteraction, SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ComponentType } = require("discord.js");
 const { logHandler } = require("../../Handlers/logHandler");
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
 		.setDescription("Get a list of all the skynara commands."),
 	/**
 	 * 
-	 * @param {CommandInteraction} interaction 
+	 * @param {ChatInputCommandInteraction} interaction 
 	 */
 	async execute(interaction) {
 		logHandler("client", "2", interaction.user.tag, interaction.commandName);
