@@ -4,9 +4,8 @@ const { logHandler } = require("../../Handlers/logHandler");
 module.exports = {
 	name: "addList",
 
-	async execute(client, queue, playlist) {
+	async execute(queue, playlist) {
 		const embed = new EmbedBuilder()
-			.setColor(client.color)
 			.setDescription(`${playlist.user},  **Add • [${playlist.name}](${playlist.url})** \`${queue.formattedDuration}\` **(${playlist.songs.length} songs) • to queue**`)
 
 		queue.textChannel.send({ embeds: [embed] });

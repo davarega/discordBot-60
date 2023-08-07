@@ -27,9 +27,6 @@ client.distube = new DisTube(client, {
 });
 
 client.commands = new Collection();
-client.color = config.color;
-client.owner = config.devUserID;
-client.emoji = config.emoji;
 
 module.exports = client;
 
