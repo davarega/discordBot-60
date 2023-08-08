@@ -28,7 +28,9 @@ module.exports = {
 		const data = await accountSchema.findOne({ userId: user.id });
 
 		const buyItem = options.getInteger("buy");
-		const listItems = config.shopList.map((item, index) => { return `**\`[ ${index + 1} ]\`** :  **${item.name}**  : \`${item.price}🪙\``}).join("\n");
+		const listItems = config.shopList.map((item, index) => { 
+			return `**\`[ ${index + 1} ]\`** :  **${item.name}**  : \`${item.price}🪙\``
+		}).join("\n");
 		
 		const itemslength = config.shopList.length;
 
@@ -79,10 +81,10 @@ module.exports = {
 				return interaction.followUp({ embeds: [embed], ephemeral: true });
 			};
 
-		} catch (error) {
-			console.log(error);
+		} catch (err) {
+			console.log(err);
 
-			logHandler("error", "0", user.tag, interaction.commandName, "", error);
+			logHandler("error", "0", user.tag, interaction.commandName, "", err);
 			return interaction.followUp({ embeds: [errorEmbed], ephemeral: true });
 		};
 	}

@@ -1,26 +1,15 @@
 {
-	"color": "#000001",
 	"devUserID": "529274140801105920",
 	"devGuildID": "876346848686788658",
 	"logChannel": "997481265299202108",
 	"webhook": {
 		"console": "https://discord.com/api/webhooks/997481515007094874/0OCJC68D_KhN0fAo-nJXccnO_99aO83sde_saNbD9M_34oHFrZcbW5lwMu_q0R-Msd7e",
 		"Skynara": "https://discord.com/api/webhooks/1137241026805907476/-EdUISmzVWeZVVlAN_xq9IMlUV0jGgJnnGACcmhW0bBZYVxu2eDWvgXRh40a0QgcnpRq",
-		"error": "https://discord.com/api/webhooks/1137230537799503953/cdwKT7epmejXg2hHQnRpwxxs-MkHmv1DETtZcScV3RPJO8B_e22tzy1VqCYZonXQVT9L"
+		"error": "https://discord.com/api/webhooks/1137230537799503953/cdwKT7epmejXg2hHQnRpwxxs-MkHmv1DETtZcScV3RPJO8B_e22tzy1VqCYZonXQVT9L",
+		"suggestion": "https://discord.com/api/webhooks/1138325947884507217/FCTxiCuDr-unybWEDgjqGjPBOLktgIzZ1eKJNgw8Zki8_V7ysyzCA-ZxvSnV8zsmQPNy"
 	},
 	"shopList": [
 		{"name": "Autoplay", "price": "10"},
 		{"name": "Filter", "price": "5"}
-	],
-	"emoji": {
-		"error": "❌",
-		"success": "✅",
-		"warn": "📛",
-		"play": "▶",
-		"pause": "⏸",
-		"skip": "⏩",
-		"jump": "⏭",
-		"coin": "🪙",
-		"nsfw": "🔞"
-	}
+	]
 }

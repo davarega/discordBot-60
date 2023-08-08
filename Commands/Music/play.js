@@ -41,14 +41,14 @@ module.exports = {
 			logHandler("distube", "0", user.tag, "", query);
 			return interaction.followUp({ embeds: [embed] });
 
-		} catch (error) {
+		} catch (err) {
 			const problem1 = "\nInvalid url link. Make sure the url link you provided is correct.";
 			const problem2 = "\nYour url link contains sensitive content. Sorry I can't play sensitive content.";
 
-			console.log(error);
+			console.log(err);
 			errorEmbed.setDescription(`Hi there! **These links aren't supported**. Some possible problems:${problem1 + problem2}`);
 
-			logHandler("error", "1", user.tag, "", query, error);
+			logHandler("error", "1", user.tag, "", query, err);
 			return interaction.followUp({ embeds: [errorEmbed], ephemeral: true });
 		};
 	}

@@ -44,10 +44,10 @@ module.exports = {
 			logHandler("distube", "8", user.tag, "", `${queue.volume}`);
 			return interaction.followUp({ embeds: [embed], ephemeral: true });
 
-		} catch (error) {
-			console.log(error);
+		} catch (err) {
+			console.log(err);
 
-			logHandler("error", "1", user.tag, "", "", error);
+			logHandler("error", "1", user.tag, "", "", err);
 			return interaction.followUp({ embeds: [errorEmbed], ephemeral: true });
 		};
 	}

@@ -19,7 +19,7 @@ module.exports = {
 			.setAuthor({ name: "Invite!" })
 			.setDescription("```Invite skynara to your server!```")
 			.setTimestamp()
-			.setFooter({ text: `Requested by ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL() });
+			.setFooter({ text: `Requested by ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) });
 
 		const row = new ActionRowBuilder()
 			.addComponents(
@@ -30,7 +30,7 @@ module.exports = {
 					.setStyle(ButtonStyle.Link)
 			);
 
-			logHandler("client", "3", interaction.user.tag, interaction.commandName);
+		logHandler("client", "3", interaction.user.tag, interaction.commandName);
 		return interaction.followUp({ embeds: [embed], components: [row] });
 	}
 };

@@ -66,10 +66,10 @@ module.exports = {
 			logHandler("distube", "9", user.tag, "", value);
 			return interaction.followUp({ embeds: [embed] });
 
-		} catch (error) {
-			console.log(error);
+		} catch (err) {
+			console.log(err);
 
-			logHandler("error", "1", user.tag, "", "", error);
+			logHandler("error", "1", user.tag, "", "", err);
 			return interaction.followUp({ embeds: [errorEmbed], ephemeral: true });
 		};
 	}

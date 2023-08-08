@@ -2,19 +2,20 @@ const { WebhookClient } = require('discord.js');
 const config = require('../config.json');
 require('colors');
 
+const str = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
+const logger = `[ ${str.slice(0, 17)} ] `;
 
 function logHandler(type = "undefined", msg = "0", user = "undefined", command = "undefined", query = "undefined", error = "undefined") {
 	logEmbed(type, msg, user, command, query, error)
-	const str = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
-	const logger = `[ ${str.slice(0, 17)} ] `;
 
-	var message = {
+	let message = {
 		"client": [
 			"[MONGODB]".green + " database connected!",
 			`${user.green} is online now!`,
 			`user: ${user.green} is trying to use command: ${command.cyan}`,
 			`user: ${user.green} successfully used command: ${command.cyan}`,
 			`user: ${user.green} successfully search: ${query.blue}, in command: ${command.cyan}`,
+			`user: ${user.green} gave a suggestion: ${query.cyan}`,
 		],
 		"distube": [
 			`user: ${user.green} searching query: ${query.cyan}`,
@@ -47,16 +48,15 @@ function logHandler(type = "undefined", msg = "0", user = "undefined", command =
 async function logEmbed(type, msg, user, command, query, error) {
 	const webhook = new WebhookClient({ url: config.webhook.console });
 	const dev = config.devUserID;
-	const str = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
-	const logger = `[ ${str.slice(0, 17)} ] `;
 
-	var message = {
+	let message = {
 		"client": [
 			`<@${dev}> [MONGODB] database connected!`,
 			`<@${dev}> ${user} is online now!`,
 			`user: ${user} is trying to use command: ${command}`,
 			`user: ${user} successfully used command: ${command}`,
 			`user: ${user} successfully search: ${query}, in command: ${command}`,
+			`<@${dev}> user: ${user} gave a suggestion: ${query}`,
 		],
 		"distube": [
 			`user: ${user} searching query: ${query}`,

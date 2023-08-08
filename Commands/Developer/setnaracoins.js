@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, ChatInputCommandInteraction, PermissionFlagsBits, EmbedBuilder, Client } = require('discord.js');
+const { SlashCommandBuilder, ChatInputCommandInteraction, PermissionFlagsBits, EmbedBuilder } = require('discord.js');
 const accountSchema = require("../../Models/accountSchema");
 const { logHandler } = require('../../Handlers/logHandler');
 const { errorEmbed } = require('../../Handlers/messageEmbed');
@@ -23,7 +23,6 @@ module.exports = {
 	/**
 	 * 
 	 * @param {ChatInputCommandInteraction} interaction 
-	 * @param {Client} client 
 	 * @returns 
 	 */
 	async execute(interaction) {
@@ -58,10 +57,10 @@ module.exports = {
 
 			logHandler("client", "3", user.tag, interaction.commandName);
 			return interaction.followUp({ embeds: [embed] });
-		} catch (error) {
-			console.log(error);
+		} catch (err) {
+			console.log(err);
 
-			logHandler("error", "0", user.tag, interaction.commandName, "", error);
+			logHandler("error", "0", user.tag, interaction.commandName, "", err);
 			return interaction.followUp({ embeds: [errorEmbed], ephemeral: true });
 		};
 	}

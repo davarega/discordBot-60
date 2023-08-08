@@ -30,10 +30,10 @@ module.exports = {
 			await queue.textChannel.send({ embeds: [embed] });
 			logHandler("distube", "3", song.user.tag, song.name, song.url);
 
-		} catch (error) {
-			console.log(error);
+		} catch (err) {
+			console.log(err);
 
-			logHandler("error", "1", song.user.tag, "", song.name, error);
+			logHandler("error", "1", song.user.tag, "", song.name, err);
 			return queue.textChannel.send({ embeds: [errorEmbed] });
 		};
 	}

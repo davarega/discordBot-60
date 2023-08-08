@@ -1,4 +1,5 @@
 const { ChatInputCommandInteraction, EmbedBuilder } = require('discord.js');
+const config = require('../../config.json');
 const { logHandler } = require('../../Handlers/logHandler');
 const accountSchema = require('../../Mode../../Models/accountSchema');
 
@@ -23,11 +24,11 @@ module.exports = {
 		};
 
 		// ========== Developer Commands ==========
-		if (command.developer && interaction.user.id !== client.config.devUserID && interaction.guild.id !== client.config.devGuildID) {
-			embed.setDescription("\`📛\` | This command is only for the SkyNara bot developer!");
+		if (command.developer && guild.id !== config.devGuildID) {
+				embed.setDescription("\`📛\` | This command is only for the SkyNara bot developer!");
 
-			logHandler("error", "0", user.tag, interaction.commandName, "", "user try developer command");
-			return interaction.reply({ embeds: [embed], ephemeral: true });
+				logHandler("error", "0", user.tag, interaction.commandName, "", "user try developer command");
+				return interaction.reply({ embeds: [embed], ephemeral: true });
 		};
 
 		// ========== Voice Channel Check ==========
@@ -43,7 +44,7 @@ module.exports = {
 			
 			logHandler("error", "0", user.tag, interaction.commandName, "", "user and bot not in the same/voice channel");
 			return interaction.reply({ embeds: [embed], ephemeral: true });
-		}
+		};
 
 		// ========== Economy Commands ==========
 		let data = await accountSchema.findOne({ userId: user.id });

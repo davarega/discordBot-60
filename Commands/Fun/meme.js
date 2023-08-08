@@ -30,10 +30,10 @@ module.exports = {
 
 				logHandler("client", "3", user.tag, interaction.commandName);
 			return interaction.followUp({ embeds: [embed] });
-		} catch (error) {
-			console.log(error);
+		} catch (err) {
+			console.log(err);
 
-			logHandler("error", "0", user.tag, interaction.commandName, "", error);
+			logHandler("error", "0", user.tag, interaction.commandName, "", err);
 			return interaction.followUp({ embeds: [errorEmbed], ephemeral: true });
 		};
 	}
