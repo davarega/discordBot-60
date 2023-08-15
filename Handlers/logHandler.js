@@ -2,11 +2,10 @@ const { WebhookClient } = require('discord.js');
 const config = require('../config.json');
 require('colors');
 
-const str = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
-const logger = `[ ${str.slice(0, 17)} ] `;
-
 function logHandler(type = "undefined", msg = "0", user = "undefined", command = "undefined", query = "undefined", error = "undefined") {
-	logEmbed(type, msg, user, command, query, error)
+	const str = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
+	const logger = `[ ${str.slice(0, 17)} ] `;
+	logEmbed(logger, type, msg, user, command, query, error)
 
 	let message = {
 		"client": [
@@ -45,7 +44,7 @@ function logHandler(type = "undefined", msg = "0", user = "undefined", command =
 	console.log(textResult);
 };
 
-async function logEmbed(type, msg, user, command, query, error) {
+async function logEmbed(logger, type, msg, user, command, query, error) {
 	const webhook = new WebhookClient({ url: config.webhook.console });
 	const dev = config.devUserID;
 

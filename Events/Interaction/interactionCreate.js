@@ -12,7 +12,13 @@ module.exports = {
 	 */
 	async execute(interaction, client) {
 		if (!interaction.isChatInputCommand()) return;
-		
+
+		// ========== Check DM's Commands ==========
+		if(!interaction.guildId) {
+			logHandler("error", "0", interaction.user.tag, interaction.commandName, "", "user trying in DM");
+			return interaction.reply({content: "\`📛\` | Sorry Skynara Bot doesn't support private messages yet"})
+		};
+
 		const { guild, member, user } = interaction;
 		const embed = new EmbedBuilder();
 
@@ -40,7 +46,7 @@ module.exports = {
 		};
 
 		if(command.sameVoiceChannel && member.voice.channel !== guild.members.me.voice.channel) {
-			embed.setDescription("\`🚨\` | You need to be in a same/voice channel.");
+			embed.setDescription("\`📛\` | You need to be in a same/voice channel.");
 			
 			logHandler("error", "0", user.tag, interaction.commandName, "", "user and bot not in the same/voice channel");
 			return interaction.reply({ embeds: [embed], ephemeral: true });
