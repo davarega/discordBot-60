@@ -3,7 +3,7 @@ const client = require('../index.js');
 const config = require('../config.json');
 
 const br = "\n=============================================\n";
-const devContact = `You can contact the developer <@${config.devUserID}>`;
+const devContact = `You can join the support server to report the problem\n${config.supportServerUrl}`;
 
 const errorEmbed = new EmbedBuilder()
 	.setAuthor({name: client.user.username, iconURL: client.user.avatarURL()})

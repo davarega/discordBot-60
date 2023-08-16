@@ -1,12 +1,13 @@
 {
 	"devUserID": "529274140801105920",
 	"devGuildID": "876346848686788658",
-	"logChannel": "997481265299202108",
+	"supportServerID": "1140994840713236572",
+	"supportServerUrl": "https://discord.gg/bK9fx6BNHs",
 	"webhook": {
-		"console": "https://discord.com/api/webhooks/997481515007094874/0OCJC68D_KhN0fAo-nJXccnO_99aO83sde_saNbD9M_34oHFrZcbW5lwMu_q0R-Msd7e",
-		"Skynara": "https://discord.com/api/webhooks/1137241026805907476/-EdUISmzVWeZVVlAN_xq9IMlUV0jGgJnnGACcmhW0bBZYVxu2eDWvgXRh40a0QgcnpRq",
-		"error": "https://discord.com/api/webhooks/1137230537799503953/cdwKT7epmejXg2hHQnRpwxxs-MkHmv1DETtZcScV3RPJO8B_e22tzy1VqCYZonXQVT9L",
-		"suggestion": "https://discord.com/api/webhooks/1138325947884507217/FCTxiCuDr-unybWEDgjqGjPBOLktgIzZ1eKJNgw8Zki8_V7ysyzCA-ZxvSnV8zsmQPNy"
+		"console": "https://discord.com/api/webhooks/1141284936905666671/o4MDslDXshLnelbNWktccHvY8DWUg3qBw_aFMIDHSe7pQNUAn6fqCKFdKfXmixlta8Iw",
+		"skynara": "https://discord.com/api/webhooks/1141284273928814673/is5_nnsKfDV5CIOb4Wl-dT0s2MXFoj1nWRjZa_FvFBxKeyoCytb3IZWm7B2GySmv4bh1",
+		"error": "https://discord.com/api/webhooks/1141284601478774825/zLaIKVRU3qYOmYesc_4AL6mArFxGdS8IAcgMAXF7I9daeTNlY4MESz02tcxzh4TUDnXn",
+		"suggestion": "https://discord.com/api/webhooks/1141284743246258206/3tTogirX9AL4RG9ggnP54KpMypQt4ag1-51bnu6TMpZ3udlFf3aZuFk1KEJ7h0hCJnWA"
 	},
 	"shopList": [
 		{"name": "Autoplay", "price": "10"},

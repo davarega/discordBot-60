@@ -35,7 +35,8 @@ function logHandler(type = "undefined", msg = "0", user = "undefined", command =
 		"error": [
 			`user: ${user.green} failed to use command: ${command.cyan}, because: ${error.red}`,
 			`user: ${user.green} failed to search: ${query.cyan}, because: ${error.red}`,
-			`user: ${user.green} failed to ${query.cyan} economy account, because: ${error.red}`
+			`user: ${user.green} failed to ${query.cyan} economy account, because: ${error.red}`,
+			`user: ${user.green} get some error: ${error.red}`
 		],
 		"undefined": ["undefined"],
 	};
@@ -76,7 +77,8 @@ async function logEmbed(logger, type, msg, user, command, query, error) {
 		"error": [
 			`user: ${user} failed to use command: ${command}, because: ${error}`,
 			`<@${dev}> user: ${user} failed to search: ${query}, because: ${error}`,
-			`user: ${user} failed to ${query} economy account, because: ${error}`
+			`user: ${user} failed to ${query} economy account, because: ${error}`,
+			`<@${dev}> user: ${user} try command: ${command} and get some error: ${error}`
 		],
 		"undefined": ["undefined"]
 	};

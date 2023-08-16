@@ -47,7 +47,7 @@ module.exports = {
 		} catch (err) {
 			console.log(err);
 
-			logHandler("error", "0", interaction.user.tag, interaction.commandName, "", err);
+			logHandler("error", "3", user.tag, interaction.commandName, "", err);
 			return interaction.followUp({ embeds: [errorEmbed], ephemeral: true });
 		}
 	}

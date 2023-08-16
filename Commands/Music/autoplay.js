@@ -5,6 +5,7 @@ const { logHandler } = require('../../Handlers/logHandler');
 const { errorEmbed } = require('../../Handlers/messageEmbed');
 
 module.exports = {
+	economyAccount: true,
 	data: new SlashCommandBuilder()
 		.setName("autoplay")
 		.setDescription("Set autoplay mode on/off."),

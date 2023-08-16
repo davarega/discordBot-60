@@ -1,10 +1,11 @@
-const { EmbedBuilder } = require("discord.js");
-const config = require('../../config.json')
+
+const { logHandler } = require("../../Handlers/logHandler");
 
 module.exports = {
 	name: "error",
 
 	async execute(client, channel, err) {
 		console.error(err);
+		logHandler("error", "3", "Distube", "error", "", err);
 	}
 };
