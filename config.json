@@ -1,16 +1,16 @@
 {
-	"devUserID": "529274140801105920",
-	"devGuildID": "876346848686788658",
-	"supportServerID": "1140994840713236572",
-	"supportServerUrl": "https://discord.gg/JwCHME7zj8",
+	"devUserID": "",
+	"devGuildID": "",
+	"supportServerID": "",
+	"supportServerUrl": "",
 	"webhook": {
-		"console": "https://discord.com/api/webhooks/1141284936905666671/o4MDslDXshLnelbNWktccHvY8DWUg3qBw_aFMIDHSe7pQNUAn6fqCKFdKfXmixlta8Iw",
-		"skynara": "https://discord.com/api/webhooks/1141284273928814673/is5_nnsKfDV5CIOb4Wl-dT0s2MXFoj1nWRjZa_FvFBxKeyoCytb3IZWm7B2GySmv4bh1",
-		"error": "https://discord.com/api/webhooks/1141284601478774825/zLaIKVRU3qYOmYesc_4AL6mArFxGdS8IAcgMAXF7I9daeTNlY4MESz02tcxzh4TUDnXn",
-		"suggestion": "https://discord.com/api/webhooks/1141284743246258206/3tTogirX9AL4RG9ggnP54KpMypQt4ag1-51bnu6TMpZ3udlFf3aZuFk1KEJ7h0hCJnWA"
+		"console": "",
+		"skynara": "",
+		"error": "",
+		"suggestion": ""
 	},
 	"shopList": [
-		{"name": "Autoplay", "price": "10"},
-		{"name": "Filter", "price": "5"}
+		{"name": "", "price": ""},
+		{"name": "", "price": ""}
 	]
 }
