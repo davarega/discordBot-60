@@ -34,7 +34,7 @@ module.exports = {
 		};
 
 		// ========== Developer Commands ==========
-		if (command.developer && guild.id !== config.devGuildID || guild.id !== config.supportServerID) {
+		if (command.developer && guild.id !== config.devGuildID && guild.id !== config.supportServerID) {
 			embed.setDescription("\`📛\` | This command is only for the SkyNara bot developer!");
 
 			logHandler("error", "0", user.tag, interaction.commandName, "", "user try developer command");

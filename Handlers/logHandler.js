@@ -1,10 +1,11 @@
 const { WebhookClient } = require('discord.js');
 const config = require('../config.json');
 require('colors');
+const webhookUrl = config.webhook.console;
 
 function logHandler(type = "undefined", msg = "0", user = "undefined", command = "undefined", query = "undefined", error = "undefined") {
 	const str = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
-	const logger = `[ ${str.slice(0, 17)} ] `;
+	const logger = `[ ${str} ] `;
 	logEmbed(logger, type, msg, user, command, query, error)
 
 	let message = {
@@ -14,7 +15,7 @@ function logHandler(type = "undefined", msg = "0", user = "undefined", command =
 			`user: ${user.green} is trying to use command: ${command.cyan}`,
 			`user: ${user.green} successfully used command: ${command.cyan}`,
 			`user: ${user.green} successfully search: ${query.blue}, in command: ${command.cyan}`,
-			`user: ${user.green} gave a suggestion: ${query.cyan}`,
+			`user: ${user.green} gave a suggestion: ${query.cyan}`
 		],
 		"distube": [
 			`user: ${user.green} searching query: ${query.cyan}`,
@@ -46,7 +47,7 @@ function logHandler(type = "undefined", msg = "0", user = "undefined", command =
 };
 
 async function logEmbed(logger, type, msg, user, command, query, error) {
-	const webhook = new WebhookClient({ url: config.webhook.console });
+	const webhook = new WebhookClient({ url: webhookUrl });
 	const dev = config.devUserID;
 
 	let message = {
@@ -56,7 +57,7 @@ async function logEmbed(logger, type, msg, user, command, query, error) {
 			`user: ${user} is trying to use command: ${command}`,
 			`user: ${user} successfully used command: ${command}`,
 			`user: ${user} successfully search: ${query}, in command: ${command}`,
-			`<@${dev}> user: ${user} gave a suggestion: ${query}`,
+			`<@${dev}> user: ${user} gave a suggestion: ${query}`
 		],
 		"distube": [
 			`user: ${user} searching query: ${query}`,

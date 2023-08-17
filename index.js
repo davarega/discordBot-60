@@ -1,7 +1,6 @@
 const { Client, GatewayIntentBits, Partials, Collection } = require('discord.js');
 const { DisTube } = require('distube');
 require('dotenv').config();
-const config = require('./config.json');
 
 const { loadCommands } = require('./Handlers/commandHandler');
 const { loadEvents } = require('./Handlers/eventHandler');
